@@ -69,8 +69,15 @@ class TopicsController < ApplicationController
 
   def dropvote
     @topic = Topic.find(params[:id])
-    @topic.votes.last.destroy if @topic.votes.count > 0
+    if @topic.votes.count > 0
+      @topic.votes.last.destroy
     redirect_to(topics_path)
+  else
+    respond_to do |format|
+      format.html { redirect_to topics_url, notice: 'You can not drovote anymore.' }
+      format.json { head :no_content }
+   end
+ end
   end
 
   private
