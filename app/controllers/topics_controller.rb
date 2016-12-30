@@ -7,6 +7,8 @@ class TopicsController < ApplicationController
     @topics = Topic.all
   end
 
+  def about
+  end
   # GET /topics/1
   # GET /topics/1.json
   def show
@@ -71,23 +73,12 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     if @topic.votes.count > 0
       @topic.votes.last.destroy
-    redirect_to(topics_path)
+      redirect_to(topics_path)
   else
-    respond_to do |format|
+     respond_to do |format|
       format.html { redirect_to topics_url, notice: 'You can not drovote anymore.' }
       format.json { head :no_content }
-   end
- end
+    end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def topic_params
-      params.require(:topic).permit(:title, :description)
-    end
+end
 end

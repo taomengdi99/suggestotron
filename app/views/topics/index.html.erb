@@ -21,9 +21,8 @@
           <%= pluralize(topic.votes.count, 'vote') %>
           <% end %>
         </td>
-
         <td><%= button_to '+1', upvote_topic_path(topic), method: :post %></td>
-        <td><%= button_to '-1', dropvote_topic_path(topic), method: :put %></td>
+        <td><%= button_to '-1', dropvote_topic_path(topic), method: :post %></td>
         <td><%= link_to 'Delete', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -31,5 +30,5 @@
 </table>
 
 <br>
-
 <%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'About', about_path %>
